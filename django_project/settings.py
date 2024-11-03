@@ -274,5 +274,13 @@ class TestSettings(Settings):
     SECRET_KEY = "testsecret"
     PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 
+    def MIDDLEWARE(self):
+        middlewares = set(super().MIDDLEWARE())
+        return list(middlewares - {"debug_toolbar.middleware.DebugToolbarMiddleware"})
+
+    def INSTALLED_APPS(self):
+        installed_apps = set(super().INSTALLED_APPS())
+        return list(installed_apps - {"debug_toolbar"})
+
 
 __getattr__, __dir__ = Settings.use()
