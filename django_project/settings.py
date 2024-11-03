@@ -215,6 +215,8 @@ class Settings(BaseSettings):
                     "django_browser_reload" if self.DEBUG else None,
                     # extensions
                     "django_extensions" if self.DEBUG else None,
+                    # tiny
+                    "tinymce",
                     # local
                 ],
             )

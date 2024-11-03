@@ -377,6 +377,18 @@ wheels = [
 ]
 
 [[package]]
+name = "django-tinymce"
+version = "4.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b3/36/56faa2cb1bde28c66ffe38d67ddbacab9c416baecbb7dd911bfabc5fa409/django_tinymce-4.1.0.tar.gz", hash = "sha256:02e3b70e940fd299f0fbef4315aee5c185664e1eb8cd396b176963954e4357c9", size = 1087250 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/91/a6/467464d08495360689380906db8e67427c381545ce8af9ce633e0128b004/django_tinymce-4.1.0-py3-none-any.whl", hash = "sha256:9804836e6d2b08de3b03a27c100f8c2e9633549913eff8b323678a10cd48b94e", size = 1317923 },
+]
+
+[[package]]
 name = "django-typer"
 version = "2.3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -657,6 +669,7 @@ dependencies = [
     { name = "django-environ" },
     { name = "django-taggit" },
     { name = "django-tailwind-cli" },
+    { name = "django-tinymce" },
     { name = "django-valkey", extra = ["brotli", "libvalkey", "msgpack"] },
     { name = "djangorestframework" },
     { name = "pillow" },
@@ -690,6 +703,7 @@ requires-dist = [
     { name = "django-environ", specifier = ">=0.11.2" },
     { name = "django-taggit", specifier = ">=6.1.0" },
     { name = "django-tailwind-cli", specifier = ">=2.19.0" },
+    { name = "django-tinymce", specifier = ">=4.1.0" },
     { name = "django-valkey", extras = ["brotli", "libvalkey", "msgpack"], specifier = ">=0.1.8" },
     { name = "djangorestframework", specifier = ">=3.15.2" },
     { name = "pillow", specifier = ">=11.0.0" },
