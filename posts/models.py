@@ -1,5 +1,6 @@
 from django.contrib.postgres.indexes import BTreeIndex
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -44,3 +45,9 @@ class Post(models.Model):
         blank=True,
     )
     pin = models.BooleanField(verbose_name=_("pin"), default=False)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("posts:post-detail", kwargs={"slug": self.slug})
