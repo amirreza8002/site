@@ -82,6 +82,9 @@ TAGGIT_CASE_INSENSITIVE = True
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
+# tailwind
+TAILWIND_APP_NAME = "theme"
+
 
 class Settings(BaseSettings):
     SECRET_KEY = "django-insecure-1xq=$6u(0oy7x3*li2glj6l3$tz#*6jq+je1&cs*uo!89%gba9"
@@ -167,6 +170,11 @@ class Settings(BaseSettings):
                         if self.DEBUG
                         else None
                     ),
+                    (
+                        "django_browser_reload.middleware.BrowserReloadMiddleware"
+                        if self.DEBUG
+                        else None
+                    ),
                 ],
             )
         )
@@ -203,7 +211,10 @@ class Settings(BaseSettings):
                     # taggit
                     "taggit",
                     # tailwind
-                    "tailwind",
+                    "django_tailwind_cli",
+                    "django_browser_reload" if self.DEBUG else None,
+                    # extensions
+                    "django_extensions" if self.DEBUG else None,
                     # local
                 ],
             )

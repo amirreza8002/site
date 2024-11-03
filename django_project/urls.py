@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from debug_toolbar.toolbar import debug_toolbar_urls
 
@@ -26,4 +26,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += debug_toolbar_urls()
+    urlpatterns += [
+        path("__reload__/", include("django_browser_reload.urls")),
+    ] + debug_toolbar_urls()
