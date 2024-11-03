@@ -92,6 +92,7 @@ class Settings(BaseSettings):
     ADMIN_URL = "admin/"
     INTERNAL_IPS = ("127.0.0.1",)
     PASSWORD_HASHERS = ("django.contrib.auth.hashers.Argon2PasswordHasher",)
+    SITE_ID = 1
 
     DEBUG = envi.bool("DEBUG", True)
     STORAGES = {
@@ -204,6 +205,8 @@ class Settings(BaseSettings):
                     "django.contrib.messages",
                     "whitenoise.runserver_nostatic" if self.DEBUG else None,
                     "django.contrib.staticfiles",
+                    "django.contrib.sites",
+                    "django.contrib.sitemaps",
                     # debug toolbar
                     "debug_toolbar" if self.DEBUG else None,
                     # rest

@@ -17,13 +17,35 @@ Including another URLconf
 
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap, index
 from django.urls import path, include
 
 from debug_toolbar.toolbar import debug_toolbar_urls
 
+from posts.sitemaps import PostSiteMap
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tinymce/", include("tinymce.urls")),
+]
+
+sitemaps = {
+    "posts": PostSiteMap,
+}
+
+urlpatterns += [
+    path(
+        "sitemap.xml",
+        index,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.index",
+    ),
+    path(
+        "sitemap-<section>.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
 ]
 
 if settings.DEBUG:
