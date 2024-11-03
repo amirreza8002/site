@@ -218,6 +218,7 @@ class Settings(BaseSettings):
                     # tiny
                     "tinymce",
                     # local
+                    "posts",
                 ],
             )
         )
