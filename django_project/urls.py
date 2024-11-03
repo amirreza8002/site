@@ -26,6 +26,7 @@ from posts.sitemaps import PostSiteMap
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("blog/", include("posts.urls")),
     path("tinymce/", include("tinymce.urls")),
 ]
 
