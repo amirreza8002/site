@@ -139,13 +139,15 @@ class Settings(BaseSettings):
     CACHES = {
         "default": {
             "BACKEND": "django_valkey.cache.ValkeyCache",
-            "LOCATION": "valkey://127.0.0.1:6379",
+            "LOCATION": "valkey://127.0.0.1:6379?protocol=3",
             "OPTIONS": {
-                "SERIALIZER": "django_valkey.serializers.msgpack.MSGPackSerializer",
-                "COMPRESSOR": "django_valkey.compressors.bz2.Bz2Compressor",
+                "COMPRESSOR": "django_valkey.compressors.brotli.BrotliCompressor",
             },
         }
     }
+    CACHE_MIDDLEWARE_ALIAS = "default"
+    CACHE_MIDDLEWARE_SECONDS = 10
+    CACHE_MIDDLEWARE_KEY_PREFIX = ""
 
     def MIDDLEWARE(self):
         return list(
@@ -158,8 +160,8 @@ class Settings(BaseSettings):
                         if self.DEBUG
                         else None
                     ),
-                    "django.middleware.cache.UpdateCacheMiddleware",
                     "django.contrib.sessions.middleware.SessionMiddleware",
+                    "django.middleware.cache.UpdateCacheMiddleware",
                     "django.middleware.common.CommonMiddleware",
                     "django.middleware.cache.FetchFromCacheMiddleware",
                     "django.middleware.csrf.CsrfViewMiddleware",
@@ -292,12 +294,13 @@ class TestSettings(Settings):
     PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 
     def MIDDLEWARE(self):
-        middlewares = set(super().MIDDLEWARE())
-        return list(middlewares - {"debug_toolbar.middleware.DebugToolbarMiddleware"})
-
-    def INSTALLED_APPS(self):
-        installed_apps = set(super().INSTALLED_APPS())
-        return list(installed_apps - {"debug_toolbar"})
+        return [
+            m
+            for m in super().MIDDLEWARE()
+            if m != "django.middleware.cache.UpdateCacheMiddleware"
+            and m != "django.middleware.cache.FetchFromCacheMiddleware"
+            and m != "debug_toolbar.middleware.DebugToolbarMiddleware"
+        ]
 
 
 __getattr__, __dir__ = Settings.use()
