@@ -11,3 +11,5 @@ wheels/
 .python-version
 .env
 .idea
+
+dump.rdb
