@@ -16,6 +16,8 @@ Including another URLconf
 """
 
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap, index
 from django.urls import path, include
@@ -24,11 +26,12 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 
 from posts.sitemaps import PostSiteMap
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path("admin/", admin.site.urls),
     path("blog/", include("posts.urls")),
     path("tinymce/", include("tinymce.urls")),
-]
+    path("", include("pages.urls")),
+)
 
 sitemaps = {
     "posts": PostSiteMap,
@@ -50,6 +53,10 @@ urlpatterns += [
 ]
 
 if settings.DEBUG:
-    urlpatterns += [
-        path("__reload__/", include("django_browser_reload.urls")),
-    ] + debug_toolbar_urls()
+    urlpatterns += (
+        [
+            path("__reload__/", include("django_browser_reload.urls")),
+        ]
+        + debug_toolbar_urls()
+        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    )
