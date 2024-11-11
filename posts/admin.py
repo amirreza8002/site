@@ -11,3 +11,4 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ("status", "created_at", "published_at")
     search_fields = ("title", "body")
     ordering = ("-published_at", "status")
+    prepopulated_fields = {"slug": ("title",)}

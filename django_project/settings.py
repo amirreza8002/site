@@ -108,6 +108,11 @@ TINYMCE_DEFAULT_CONFIG = {
     "custom_undo_redo_levels": 10,
 }
 
+# thumbnail
+THUMBNAIL_FORMAT = "AVIF"
+THUMBNAIL_ENGINE = "posts.utils.AvifEngine"
+THUMBNAIL_BACKEND = "posts.utils.AvifBackend"
+
 
 class Settings(BaseSettings):
     SECRET_KEY = "django-insecure-1xq=$6u(0oy7x3*li2glj6l3$tz#*6jq+je1&cs*uo!89%gba9"
@@ -234,6 +239,8 @@ class Settings(BaseSettings):
                     "django.contrib.staticfiles",
                     "django.contrib.sites",
                     "django.contrib.sitemaps",
+                    # thumbnail
+                    "sorl.thumbnail",
                     # debug toolbar
                     "debug_toolbar" if self.DEBUG else None,
                     # rest

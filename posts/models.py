@@ -8,6 +8,8 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 from tinymce.models import HTMLField
 
+from .utils import convert_pictures
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -55,6 +57,17 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+        new_path = convert_pictures(
+            self.image.path, format="AVIF", unlink=True, pil_verify=True
+        )
+        self.image = str(new_path)
+        super().save(
+            *args,
+            update_fields=["image"],
+            force_update=True,
+            using=kwargs.get("using", None),
+        )
 
     def get_absolute_url(self):
         return reverse("posts:post-detail", kwargs={"slug": self.slug})
