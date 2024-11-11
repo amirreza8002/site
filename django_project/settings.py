@@ -112,6 +112,8 @@ TINYMCE_DEFAULT_CONFIG = {
 THUMBNAIL_FORMAT = "AVIF"
 THUMBNAIL_ENGINE = "posts.utils.AvifEngine"
 THUMBNAIL_BACKEND = "posts.utils.AvifBackend"
+THUMBNAIL_KVSTORE = "posts.utils.DefaultKVStore"
+THUMBNAIL_VALKEY_TIMEOUT = 3600 * 24 * 365 * 10
 
 
 class Settings(BaseSettings):

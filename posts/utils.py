@@ -3,14 +3,16 @@ from io import BytesIO
 from pathlib import Path
 
 from django.conf import settings
+from django.core.cache import cache
 
 from PIL import Image, ImageFile
 import pillow_avif  # noqa: F401
 
 from sorl.thumbnail.base import ThumbnailBackend
-from sorl.thumbnail.engines.pil_engine import Engine
 from sorl.thumbnail.conf import defaults as default_settings, settings as sorl_settings
+from sorl.thumbnail.engines.pil_engine import Engine
 from sorl.thumbnail.helpers import tokey, serialize
+from sorl.thumbnail.kvstores.base import KVStoreBase
 
 
 logger = logging.getLogger(__name__)
@@ -143,3 +145,26 @@ class AvifEngine(Engine):
             bf.close()
 
         return raw_data
+
+
+class DefaultKVStore(KVStoreBase):
+    def __init__(self):
+        super().__init__()
+        self.connection = cache
+
+    def _get_raw(self, key):
+        return self.connection.get(key)
+
+    def _set_raw(self, key, value):
+        return self.connection.set(
+            key, value, px=sorl_settings.THUMBNAIL_VALKEY_TIMEOUT * 1000
+        )
+
+    def _delete_raw(self, *keys):
+        return self.connection.delete(*keys)
+
+    def _find_keys_raw(self, prefix):
+        pattern = prefix + "*"
+        return list(
+            map(lambda key: key.decode("utf-8"), self.connection.keys(pattern=pattern))
+        )
