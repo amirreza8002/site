@@ -13,3 +13,5 @@ wheels/
 .idea
 
 dump.rdb
+node_modules
+media/*
