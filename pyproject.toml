@@ -11,12 +11,13 @@ dependencies = [
     "django-taggit>=6.1.0",
     "django-tailwind-cli>=2.19.0",
     "django-tinymce>=4.1.0",
-    "django-valkey[brotli,libvalkey,msgpack]>=0.1.8",
+    "django-valkey[brotli,libvalkey]>=0.1.8",
     "django>=5.1.2",
     "djangorestframework>=3.15.2",
     "pillow>=11.0.0",
     "pip>=24.3.1",
     "psycopg[c,pool]>=3.2.3",
+    "sorl-thumbnail>=12.11.0",
 ]
 
 [tool.uv]
@@ -51,7 +52,7 @@ asyncio_default_fixture_loop_scope = "session"
 [tool.coverage.run]
 plugins = ["django_coverage_plugin"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F401", "F403"]
 "**/{migrations}/*" = ["F401"]
 
