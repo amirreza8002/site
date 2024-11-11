@@ -25,6 +25,8 @@ class Post(models.Model):
 
     title = models.CharField(verbose_name=_("title"), max_length=255)
     slug = models.SlugField(verbose_name=_("slug"), max_length=300, unique=True)
+    image = models.ImageField(verbose_name=_("image"), upload_to="posts/%Y/%m/%d")
+    alt = models.CharField(verbose_name=_("alt"), max_length=100)
     body = HTMLField(verbose_name=_("body"))
     status = models.CharField(
         verbose_name=_("status"),
