@@ -1,12 +1,39 @@
 {% extends '_base.html' %}
 
-{% block body %}
-  list
-	{% for post in post_list %}
-    <p>{{ post.title }}</p>
-    <p>{{ post.body }}</p>
-    {% for tag in post.tags.all %}
-      <p>{{ tag }}</p>
-    {% endfor %}
-  {% endfor %}
+{% block main %}
+  <h1 class="container px-6 pt-6 mx-auto text-3xl font-bold">Blog</h1>
+
+  <!-- blog posts -->
+  {% include 'includes/blog_card.html' %}
+  <!-- end blog posts -->
+
+  <!-- pagination -->
+  <div class="grid place-items-center mb-8">
+  {% if page_obj.has_other_pages %}
+<ul class="pagination">
+    <li class="page-item">
+        <a href="?page=1" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    <li class="page-item{% if not page_obj.has_previous %} disabled{% endif %}">
+    <a {% if page_obj.has_previous %}href="?page={{ page_obj.previous_page_number }}"{% endif %} class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    {% if page_obj.paginator.num_pages <= 3 or next_pages_number == 0  %}
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item{% if num == page_obj.number %} active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endfor %}
+    {% else %}
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    {% endif %}
+    <li class="page-item{% if not page_obj.has_next %} disabled{% endif %}">
+    <a {% if page_obj.has_next %}href="{{ page_obj.next_page_number }}"{% endif %} class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    <li class="page-item">
+        <a href="{{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    {{ end }}
+</ul>
+    {% endif %}
+  </div>
+  <!-- end pagination -->
+
 {% endblock %}
