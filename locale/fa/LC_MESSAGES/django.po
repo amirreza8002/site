@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-08 14:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: django_project/settings.py:56
+msgid "Persian"
+msgstr "فارسی"
+
+#: django_project/settings.py:56
+msgid "English"
+msgstr "انگلیسی"
+
+#: pages/apps.py:8
+msgid "Page"
+msgstr "صفحه"
+
+#: pages/apps.py:9
+msgid "Pages"
+msgstr "صفحه‌ها"
+
+#: posts/apps.py:8
+msgid "Post"
+msgstr "پست"
+
+#: posts/apps.py:9
+msgid "Posts"
+msgstr "پست‌ها"
+
+#: posts/models.py:23
+msgid "Draft"
+msgstr "پیش نویس"
+
+#: posts/models.py:24
+msgid "Published"
+msgstr "منتشر شده"
+
+#: posts/models.py:26
+msgid "title"
+msgstr "عنوان"
+
+#: posts/models.py:27
+msgid "slug"
+msgstr ""
+
+#: posts/models.py:28
+msgid "image"
+msgstr "عکس"
+
+#: posts/models.py:29
+msgid "alt"
+msgstr ""
+
+#: posts/models.py:30
+msgid "body"
+msgstr "بدنه"
+
+#: posts/models.py:32
+msgid "status"
+msgstr "وضعیت"
+
+#: posts/models.py:37
+msgid "created"
+msgstr "زمان ایجاد"
+
+#: posts/models.py:38
+msgid "updated"
+msgstr "زمان بروزرسانی"
+
+#: posts/models.py:40
+msgid "published"
+msgstr "زمان انتشار"
+
+#: posts/models.py:47
+msgid "tags"
+msgstr ""
+
+#: posts/models.py:50
+msgid "pin"
+msgstr "سنجاق"
+
+#: templates/_base.html:34
+msgid "My Blog"
+msgstr "بلاگ من"
+
+#: templates/_base.html:45
+msgid "Blog"
+msgstr "بلاگ"
+
+#: templates/_base.html:46
+msgid "About"
+msgstr "درباره"
+
+#: templates/_base.html:47
+msgid "Feed"
+msgstr ""
+
+#: templates/_base.html:60
+msgid "Language"
+msgstr "زبان"
+
+#: templates/_base.html:119
+msgid "My Socials"
+msgstr "اکانت‌های اجتماعی"
+
+#: templates/_base.html:120
+msgid "Feel free to send a message if you need to."
+msgstr "اگه نیاز دارید پیام بدین"
+
+#: templates/pages/home.html:10
+msgid "hi there! I'm amirreza"
+msgstr "سلام، من امیررضام"
+
+#: templates/pages/home.html:11
+msgid ""
+"I'm a python developer with a focus on web backend. I like tea, novels and "
+"(middle)eastern philosophy"
+msgstr "یه برنامه نویس پایتون با تمرکز روی بک‌اند. علاقه‌مند به چایی، رمان و فلسفه خاورمیانه‌ای"
