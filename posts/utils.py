@@ -157,7 +157,7 @@ class DefaultKVStore(KVStoreBase):
 
     def _set_raw(self, key, value):
         return self.connection.set(
-            key, value, px=sorl_settings.THUMBNAIL_VALKEY_TIMEOUT * 1000
+            key, value, timeout=sorl_settings.THUMBNAIL_VALKEY_TIMEOUT * 1000
         )
 
     def _delete_raw(self, *keys):
