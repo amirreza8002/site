@@ -1,6 +1,4 @@
 // Credits to search implementation: https://gist.github.com/cmod/5410eae147e4318164258742dd053993
-
-var fuse; // holds our search engine
 var searchVisible = false;
 var firstRun = true; // allow us to delay loading json data unless search activated
 var list = document.querySelector('.search-list'); // targets the <ul>
@@ -50,7 +48,7 @@ document.addEventListener('keydown', function (event) {
   }
 
   // Allow ESC (27) to close search box
-  if (event.keyCode == 27) {
+  if (event.code == 27) {
     if (searchVisible) {
       document.querySelector('.search-ui').classList.add("hidden");
       document.activeElement.blur();
@@ -60,7 +58,7 @@ document.addEventListener('keydown', function (event) {
   }
 
   // DOWN (40) arrow
-  if (event.keyCode == 40) {
+  if (event.code == 40) {
     if (searchVisible && resultsAvailable) {
       console.log("down");
       event.preventDefault(); // stop window from scrolling
@@ -71,7 +69,7 @@ document.addEventListener('keydown', function (event) {
   }
 
   // UP (38) arrow
-  if (event.keyCode == 38) {
+  if (event.code == 38) {
     if (searchVisible && resultsAvailable) {
       event.preventDefault(); // stop window from scrolling
       if (document.activeElement == maininput) { maininput.focus(); } // If we're in the input box, do nothing
@@ -93,53 +91,47 @@ document.querySelector('.search-ui input').onkeyup = function (e) {
 // ==========================================
 // fetch some json without jquery
 //
-function fetchJSONFile(path, callback) {
-  var httpRequest = new XMLHttpRequest();
-  httpRequest.onreadystatechange = function () {
-    if (httpRequest.readyState === 4) {
-      if (httpRequest.status === 200) {
-        var data = JSON.parse(httpRequest.responseText);
-        if (callback) callback(data);
-      }
-    }
-  };
-  httpRequest.open('GET', path);
-  httpRequest.send();
-}
 
+async function fetchJSON(url, { headers = {}, ...init } = {}) {
+  const response = await fetch(url, {
+    ...init,
+    method: "GET",
+    credentials: "same-origin",
+    headers: {
+      ...headers,
 
-// ==========================================
-// load our search index, only executed once
-// on first call of search box (CMD-/)
-//
-function loadSearch() {
-  const lang = document.querySelector('head > meta[name="lang"]')?.getAttribute?.('content')
-  fetchJSONFile(`${lang ? "/" + lang : ""}/index.json`, function (data) {
-
-    var options = { // fuse.js options; check fuse.js website for details
-      shouldSort: true,
-      location: 0,
-      distance: 100,
-      threshold: 0.4,
-      minMatchCharLength: 2,
-      keys: [
-        'title',
-        'permalink',
-        'contents'
-      ]
-    };
-    fuse = new Fuse(data, options); // build the index from the json file
+      "Content-Type": "application/json",
+    },
   });
+
+  if (!response.ok) throw new Error(`Request at ${url} failed`);
+
+  if (
+    response.status !== 201 &&
+    response.status !== 202 &&
+    response.status !== 200
+  ) {
+    console.log(response.status);
+    return console.log("action unsuccessful");
+  }
+  return response.json();
 }
 
+async function getSearchDataAJAX(text) {
+    const url = `/blog/search?q=${text}`
+    response = await fetchJSON(url, {
+        headers: {
+             "X-Requested-With": "XMLHttpRequest",
+        }
+    })
+}
 
 // ==========================================
-// using the index we loaded on CMD-/, run
-// a search query (for "term") every time a letter is typed
+// run a search query (for "term") every time a letter is typed
 // in the search box
 //
-function executeSearch(term) {
-  let results = fuse.search(term); // the actual query being run using fuse.js
+async function executeSearch(term) {
+  let results = await getSearchDataAJAX(term); // the actual query being run using fuse.js
   let searchitems = ''; // our results bucket
 
   if (results.length === 0) { // no results based on what was typed into the input box
@@ -156,12 +148,12 @@ function executeSearch(term) {
       searchResultsHeading.classList.remove('hidden');
     }
 
-    for (let item in results.slice(0, 5)) { // only show first 5 results
-      const title = '<div class="text-2xl mb-2 font-bold">' + results[item].item.title + '</div>';
-      const date = results[item].item.date ? '<div><em class="px-4">' + new Date(results[item].item.date).toUTCString().substring(0, 16) + '</em></div>' : '';
-      const contents = '<div class="prose px-4">' + results[item].item.contents + '</div>';
+    for (let item in results) { // only show first 5 results
+      const title = '<div class="text-2xl mb-2 font-bold">' + results[item].title + '</div>';
+      const body = '<div class="prose px-4">' + results[item].body + '</div>';
+      const itemUrl = `/blog/${results[item].slug}`
 
-      searchitems = searchitems + '<li><a class="block mb-2 px-4 py-2 rounded pb-2 border-b border-gray-200 dark:border-gray-600 focus:bg-gray-100 dark:focus:bg-gray-700 focus:outline-none" href="' + results[item].item.permalink + '" tabindex="0">' + title + '</a>' + date + contents + '</li>';
+      searchitems = searchitems + '<li><a class="block mb-2 px-4 py-2 rounded pb-2 border-b border-gray-200 dark:border-gray-600 focus:bg-gray-100 dark:focus:bg-gray-700 focus:outline-none" href="' + itemUrl + '" tabindex="0">' + title + '</a>' + body + '</li>';
     }
     resultsAvailable = true;
   }
