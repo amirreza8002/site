@@ -1,11 +1,12 @@
 {% extends '_base.html' %}
 {% load thumbnail %}
 
-{% block main %} 
+{% block main %}
 
   <div class="relative max-w-5xl mx-auto px-4">
-  {% thumbnail post.image "992x620" crop="center" as img %}
-    <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ post.alt }}" class="rounded-lg shadow-sm w-full object-contain" />
+    {% thumbnail post.image "992x620" crop="center" as img %}
+      <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ post.alt }}" class="rounded-lg shadow-sm w-full object-contain" />
+    {% endthumbnail %}
   </div>
 
   <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">

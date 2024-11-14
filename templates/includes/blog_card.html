@@ -6,7 +6,8 @@
         <a href="{{ post.get_absolute_url }}">
           <div class="relative">
             {% thumbnail post.image "458x208" crop="center" as img %}
-            <img src="{{ img.url }}" alt="{{ post.alt }}" class="rounded-lg shadow-sm w-full h-52 object-cover" width="{{ img.width }}" height="{{ img.height }}">
+              <img src="{{ img.url }}" alt="{{ post.alt }}" class="rounded-lg shadow-sm w-full h-52 object-cover" width="{{ img.width }}" height="{{ img.height }}">
+            {% endthumbnail %}
           </div>
           <div class="my-2 text-xl font-semibold">{{ post.title }}</div>
           <div></div>
