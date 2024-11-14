@@ -27,7 +27,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 from posts.sitemaps import PostSiteMap
 
 urlpatterns = i18n_patterns(
-    path("admin/", admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
     path("blog/", include("posts.urls")),
     path("tinymce/", include("tinymce.urls")),
     path("", include("pages.urls")),
