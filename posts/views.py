@@ -30,3 +30,21 @@ class PostDetailView(DetailView):
             raise Http404
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+
+# @require_GET
+# def search_ajax(request):
+#     is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
+#     if not is_ajax:
+#         return Http404
+#
+#     url_params = request.GET.get("q")
+#
+#     if url_params:
+#         query = SearchQuery(url_params)
+#         vector = SearchVector("title", "body")
+#         search = Post.published.annotate(
+#             rank=SearchRank(vector, query).order_by("-rank")
+#         )[:5]
+#         response = [res for res in search]
+#         return JsonResponse(response, safe=False)
