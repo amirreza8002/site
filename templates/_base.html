@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load tailwind_cli %}
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}" itemscope itemtype="http://schema.org/WebPage">
+<html lang="{{ LANGUAGE_CODE }}" itemscope itemtype="http://schema.org/WebPage" dir="{% if LANGUAGE_CODE == 'fa' %}rtl{% else %}ltr{% endif %}">
 <!doctype html>
   <head>
     <title>{% block title %}My blog{% endblock %}</title>
@@ -113,7 +113,7 @@
     <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
       <div>
         <div class="text-2xl font-bold mb-2">{% translate 'My Socials' %}</div>
-        <p class="opacity-60">{% translate 'Feel free to send a message if you need to.' %}</p>
+        <p class="opacity-60">{% translate 'Feel free to send a message if you want to.' %}</p>
       </div>
 
       <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
