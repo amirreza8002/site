@@ -117,7 +117,7 @@ THUMBNAIL_VALKEY_TIMEOUT = 3600 * 24 * 365 * 10
 
 
 class Settings(BaseSettings):
-    SECRET_KEY = "django-insecure-1xq=$6u(0oy7x3*li2glj6l3$tz#*6jq+je1&cs*uo!89%gba9"
+    SECRET_KEY = envi.str("SECRET_KEY")
     ALLOWED_HOSTS = ("localhost", "127.0.0.1")
     ADMIN_URL = "admin/"
     INTERNAL_IPS = ("127.0.0.1",)
