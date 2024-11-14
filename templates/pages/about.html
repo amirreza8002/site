@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+{% load i18n %}
+
+{% block main %}
+	<article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+    <h1 class="text-2x1 font-bold mb-2">{% blocktranslate %}About Me{% endblocktranslate %}</h1>
+    <p>
+      {% blocktranslate %}Hi! I'm amirreza.{% endblocktranslate %}
+    </p>
+    <p>
+      {% blocktranslate %}i'm a programmer with a focus on web backend, specially python and django.{% endblocktranslate %}
+    </p>
+    <p>
+      {% blocktranslate %}i've been programming since 2022 and have some understanding of what's what.{% endblocktranslate %}
+    </p>
+    <p>
+      {% blocktranslate %}i'm self-taught and like to do open-source work.{% endblocktranslate %}<br/>
+      <bidi>{% blocktranslate %}i'm currently maintaining/contributing to <a target="_blank" href="https://github.com/amirreza8002/django-valkey">django-valkey</a> and some small projects alongside it, come visit if you're interested.{% endblocktranslate %}</bidi>
+    </p>
+    <p>
+      {% blocktranslate %}you can contact me with the handles below, or come and chat in python or django's discord servers.{% endblocktranslate %}
+    </p>
+    <p>
+      {% blocktranslate %}the source code of this site is also available and free licence at <a href="https://github.com/amirreza8002/site" target="_blank">GitHub</a>.{% endblocktranslate %}
+    </p>
+  </article>
+{% endblock %}
