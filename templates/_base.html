@@ -1,6 +1,4 @@
-{% load static %}
-{% load i18n %}
-{% load tailwind_cli %}
+{% load i18n static tailwind_cli %}
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}" itemscope itemtype="http://schema.org/WebPage" dir="{% if LANGUAGE_CODE == 'fa' %}rtl{% else %}ltr{% endif %}">
 <!doctype html>
@@ -14,10 +12,10 @@
 
     {% block css_links %}
       <link rel="stylesheet" href="{% static 'css/built.css' %}">
-    {% endblock %}
+    {% endblock css_links %}
 
     {% block js_links %}
-    {% endblock %}
+    {% endblock js_links %}
   </head>
 <body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen">
 {% block header %}
@@ -102,12 +100,12 @@
         </li>
       </ul>
     </header>
-{% endblock %}
+{% endblock header %}
 
 <main class="flex-1">
 
 {% block main %}
-{% endblock %}
+{% endblock main %}
 <!-- socials -->
   <div class="bg-blue-100 dark:bg-gray-900">
     <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
@@ -235,11 +233,11 @@
   </div>
 </div>
 
-{#{{ $fuse := resources.Get "js/fuse.min.js" }}#}
-{#{{ $search := resources.Get "js/search.js" }}#}
-{##}
-{#{{ $concatjs := slice $fuse $search | resources.Concat "js/scripts.js" | resources.Minify }}#}
-{#<script src="{{ $concatjs.Permalink }}"></script>#}
+{# {{ $fuse := resources.Get "js/fuse.min.js" }} #}
+{# {{ $search := resources.Get "js/search.js" }} #}
+{#  #}
+{# {{ $concatjs := slice $fuse $search | resources.Concat "js/scripts.js" | resources.Minify }} #}
+{# <script src="{{ $concatjs.Permalink }}"></script> #}
 {% endcomment %}
 
 

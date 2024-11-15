@@ -17,7 +17,7 @@
     <li class="page-item{% if not page_obj.has_previous %} disabled{% endif %}">
     <a {% if page_obj.has_previous %}href="?page={{ page_obj.previous_page_number }}"{% endif %} class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
-    {% if page_obj.paginator.num_pages <= 3 or next_pages_number == 0  %}
+    {% if page_obj.paginator.num_pages <= 3 or next_pages_number == 0 %}
       {% for num in page_obj.paginator.page_range %}
         <li class="page-item{% if num == page_obj.number %} active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
       {% endfor %}
@@ -36,4 +36,4 @@
   </div>
   <!-- end pagination -->
 
-{% endblock %}
+{% endblock main %}
