@@ -1,3 +1,4 @@
+# from django.core import serializers
 from django.http import Http404
 from django.views.generic import DetailView, ListView
 
@@ -34,17 +35,18 @@ class PostDetailView(DetailView):
 
 # @require_GET
 # def search_ajax(request):
-#     is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
-#     if not is_ajax:
-#         return Http404
-#
-#     url_params = request.GET.get("q")
-#
-#     if url_params:
-#         query = SearchQuery(url_params)
-#         vector = SearchVector("title", "body")
-#         search = Post.published.annotate(
-#             rank=SearchRank(vector, query).order_by("-rank")
-#         )[:5]
-#         response = [res for res in search]
-#         return JsonResponse(response, safe=False)
+#    is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
+#    if not is_ajax:
+#        return JsonResponse({"fail": "most be an ajax request"}, status=404)
+#    url_params = request.GET.get("q")
+
+#    if url_params:
+#        query = SearchQuery(url_params)
+#        vector = SearchVector("title", "body")
+#        search = Post.published.annotate(rank=SearchRank(vector, query)).order_by(
+#            "-rank"
+#        )[:5]
+#        response = serializers.serialize(
+#            "json", search, fields=["title", "body", "slug"]
+#        )
+#        return JsonResponse({"wrapper": response}, status=200)
