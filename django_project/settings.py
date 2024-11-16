@@ -249,8 +249,7 @@ class Settings(BaseSettings):
                     "rest_framework",
                     # taggit
                     "taggit",
-                    # tailwind
-                    "django_tailwind_cli",
+                    # browser reload
                     "django_browser_reload" if self.DEBUG else None,
                     # extensions
                     "django_extensions" if self.DEBUG else None,
