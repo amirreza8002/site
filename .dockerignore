@@ -1,0 +1,12 @@
+.venv
+.git
+.gitignore
+__pycache__/
+.python-version
+README.md
+.idea
+.editorconfig
+.pre-commit-config.yaml
+package-lock.json
+node_modules
+media/*
