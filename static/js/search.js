@@ -124,6 +124,7 @@ async function getSearchDataAJAX(text) {
              "X-Requested-With": "XMLHttpRequest",
         }
     })
+    return response
 }
 
 // ==========================================
@@ -131,7 +132,7 @@ async function getSearchDataAJAX(text) {
 // in the search box
 //
 async function executeSearch(term) {
-  let results = await getSearchDataAJAX(term); // the actual query being run using fuse.js
+  let results = await getSearchDataAJAX(term); // the actual query being run.
   let searchitems = ''; // our results bucket
 
   if (results.length === 0) { // no results based on what was typed into the input box
@@ -148,7 +149,7 @@ async function executeSearch(term) {
       searchResultsHeading.classList.remove('hidden');
     }
 
-    for (let item in results) { // only show first 5 results
+    for (let item in results.wrapper) {
       const title = '<div class="text-2xl mb-2 font-bold">' + results[item].title + '</div>';
       const body = '<div class="prose px-4">' + results[item].body + '</div>';
       const itemUrl = `/blog/${results[item].slug}`
