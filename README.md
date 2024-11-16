@@ -16,3 +16,6 @@ you should add a `.env` file containing:
 7. `DEBUG`, in production it defaults to `False`
 
 INTERNAL_IPS is set to 127.0.0.1, change that if you are using docker
+
+create a file named `nginx.conf` at `compose/production/nginx`
+this file will be used as the main nginx conf file and should include all the confs needed, look at `compose/production/nginx/example_nginx.conf` for examples
