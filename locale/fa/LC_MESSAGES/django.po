@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-14 20:37+0000\n"
+"POT-Creation-Date: 2024-11-17 23:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,27 +94,27 @@ msgstr ""
 msgid "pin"
 msgstr "سنجاق"
 
-#: templates/_base.html:37
+#: templates/_base.html:35
 msgid "Blog"
 msgstr "بلاگ"
 
-#: templates/_base.html:38
+#: templates/_base.html:36
 msgid "About"
 msgstr "درباره"
 
-#: templates/_base.html:39
+#: templates/_base.html:37
 msgid "Feed"
 msgstr ""
 
-#: templates/_base.html:53
+#: templates/_base.html:51
 msgid "Language"
 msgstr "زبان"
 
-#: templates/_base.html:116
+#: templates/_base.html:114
 msgid "My Socials"
 msgstr "اکانت‌های اجتماعی"
 
-#: templates/_base.html:117
+#: templates/_base.html:115
 msgid "Feel free to send a message if you want to."
 msgstr "اگه میخواید پیام بدین."
 
@@ -132,9 +132,8 @@ msgid ""
 msgstr "یه برنامه نویس با تمرکز روی بک‌اند، مخصوصا پایتون و جنگو."
 
 #: templates/pages/about.html:14
-msgid ""
-"i've been programming since 2022 and have some understanding of what's what."
-msgstr "از سال ۱۴۰۱ کد مینویسم و یه چیزایی یاد گرفتم."
+msgid "i've been programming since 2022."
+msgstr "از سال ۱۴۰۱ کد مینویسم."
 
 #: templates/pages/about.html:17
 msgid "i'm self-taught and like to do open-source work."
@@ -145,17 +144,17 @@ msgid ""
 "i'm currently maintaining/contributing to <a target=\"_blank\" "
 "href=\"https://github.com/amirreza8002/django-valkey\">django-valkey</a> and "
 "some small projects alongside it, come visit if you're interested."
-msgstr "الان پروژه <a target=\"_blank\" href=\"https://github.com/amirreza8002/"
+msgstr ""
+"الان <a target=\"_blank\" href=\"https://github.com/amirreza8002/"
 "django-valkey\">این پروژه</a> و چندتا پروژه کوچیک‌تر رو نگهداری میکنم (یا "
 "مشارکت میکنم)، دوست داشتین یه سر بزنین."
-
 
 #: templates/pages/about.html:21
 msgid ""
 "you can contact me with the handles below, or come and chat in python or "
 "django's discord servers."
 msgstr ""
-"میتونین با لینک‌های پایین با من ارتباط بگیرین، یا بیاین تو دیسکرو پایتون یا "
+"میتونین با لینک‌های پایین با من ارتباط بگیرین، یا بیاین تو دیسکورد پایتون یا "
 "جنگو حرف بزنیم."
 
 #: templates/pages/about.html:24
@@ -166,11 +165,11 @@ msgstr ""
 "سورس کد این سایت به شکل رایگان تو <a href=\"https://github.com/amirreza8002/"
 "site\" target=\"_blank\">گیتهاب</a> در دسترسه."
 
-#: templates/pages/home.html:10
+#: templates/pages/home.html:9
 msgid "hi there! I'm amirreza"
 msgstr "سلام، من امیررضام"
 
-#: templates/pages/home.html:11
+#: templates/pages/home.html:10
 msgid ""
 "I'm a python developer with a focus on web backend. I like tea, novels and "
 "(middle)eastern philosophy"
