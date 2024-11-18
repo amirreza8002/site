@@ -14,8 +14,8 @@ RUN cd nginx-1.27.2 && ./configure --with-compat --add-dynamic-module=../ngx_bro
 
 FROM nginx:1.27.2
 
-COPY ./compose/production/nginx/cert.pem /etc/nginx/cert.pem
-COPY ./compose/production/nginx/key.pem /etc/nginx/key.pem
+COPY ./compose/production/nginx/teapot.codes.pem /etc/nginx/teapot.codes.pem
+COPY ./compose/production/nginx/teapot.codes.key /etc/nginx/teapot.codes.key
 COPY ./compose/production/nginx/cloudflare.crt /etc/nginx/cloudflare.crt
 COPY ./compose/production/nginx/nginx.conf /etc/nginx/nginx.conf
 
