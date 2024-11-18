@@ -16,3 +16,6 @@ wheels/
 dump.rdb
 node_modules
 media/*
+*.pem
+*.crt
+*.key
