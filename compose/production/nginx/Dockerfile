@@ -21,6 +21,5 @@ COPY ./compose/production/nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=builder /app/nginx-1.27.2/objs/ngx_http_brotli_static_module.so /etc/nginx/modules/
 COPY --from=builder /app/nginx-1.27.2/objs/ngx_http_brotli_filter_module.so /etc/nginx/modules/
-RUN echo "load_module modules/ngx_http_brotli_filter_module.so;\nload_module modules/ngx_http_brotli_static_module.so;\n$(cat /etc/nginx/nginx.conf)" > /etc/nginx/nginx.conf
 
 
