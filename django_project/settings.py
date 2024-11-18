@@ -123,6 +123,7 @@ class Settings(BaseSettings):
     INTERNAL_IPS = ("127.0.0.1",)
     PASSWORD_HASHERS = ("django.contrib.auth.hashers.Argon2PasswordHasher",)
     SITE_ID = 1
+    CACHE_HOST = envi.str("CACHE_HOST", "valkey")
 
     DEBUG = envi.bool("DEBUG", True)
     STORAGES = {
@@ -170,15 +171,17 @@ class Settings(BaseSettings):
     CACHES = {
         "default": {
             "BACKEND": "django_valkey.cache.ValkeyCache",
-            "LOCATION": "valkey://127.0.0.1:6379?protocol=3",
+            "LOCATION": f"valkey://{CACHE_HOST}:6379?protocol=3",
             "OPTIONS": {
                 "COMPRESSOR": "django_valkey.compressors.brotli.BrotliCompressor",
+                "IGNORE_EXCEPTIONS": True,
             },
         }
     }
     CACHE_MIDDLEWARE_ALIAS = "default"
     CACHE_MIDDLEWARE_SECONDS = 10
     CACHE_MIDDLEWARE_KEY_PREFIX = ""
+    DJANGO_VALKEY_LOG_IGNORED_EXCEPTION = True
 
     def MIDDLEWARE(self):
         return list(

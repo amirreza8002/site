@@ -14,6 +14,7 @@ you should add a `.env` file containing:
 5. `DJANGO_MODE`, either don't set it, or set as `prod`
 6. `ADMIN_URL`, production setting, default to `admin/`
 7. `DEBUG`, in production it defaults to `False`
+8. `CACHE_HOST` the host name of your cache server, e.g 127.0.0.1
 
 INTERNAL_IPS is set to 127.0.0.1, change that if you are using docker
 

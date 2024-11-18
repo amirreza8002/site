@@ -36,7 +36,10 @@ services:
       - ./.envs/.production/.postgres
 
   valkey:
-    image: docker.io/valkey/valkey:latest
+    build:
+      context: .
+      dockerfile: ./compose/production/valkey/Dockerfile
+    image: valkey
 
 
   nginx:
