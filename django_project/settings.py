@@ -343,6 +343,7 @@ class ProdSettings(Settings):
         database["default"]["CONN_MAX_AGE"] = envi.int(
             "django_conn_max_age", default=60
         )
+        return database
 
 
 class TestSettings(Settings):
