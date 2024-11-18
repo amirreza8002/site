@@ -20,3 +20,9 @@ INTERNAL_IPS is set to 127.0.0.1, change that if you are using docker
 
 create a file named `nginx.conf` at `compose/production/nginx`
 this file will be used as the main nginx conf file and should include all the confs needed, look at `compose/production/nginx/example_nginx.conf` for examples
+
+at `compose/production/nging/Dockerfile` lines 17 and 18, change the file names to your own domain name
+save origin ssl cert and key in these two files
+
+if you use origin CA certificate, save it as `compose/production/nginx/cloudflare.crt`
+otherwise delete line 19 at `compose/production/nginx/Dockerfile`, and lines 62 and 63 at example_nginx.conf
