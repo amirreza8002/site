@@ -242,7 +242,7 @@ class Settings(BaseSettings):
                 "PASSWORD": envi.str("POSTGRES_PASSWORD", default="postgres"),
                 "HOST": envi.str("POSTGRES_HOST", default="localhost"),
                 "PORT": 5432,
-                # "ATOMIC_REQUESTS": True,
+                "ATOMIC_REQUESTS": True,
             }
         }
 
