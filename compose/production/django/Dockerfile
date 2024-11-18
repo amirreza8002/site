@@ -7,21 +7,8 @@ FROM python AS python-build-stage
 
 ARG BUILD_ENVIRONMENT=production
 
-# Install apt packages
-RUN apt-get update && apt-get install --no-install-recommends -y \
-  # dependencies for building Python packages
-  build-essential \
-  # psycopg dependencies
-  libpq-dev \
-  # uv dep
-  curl \
-  ca-certificates
-
 # Requirements are installed here to ensure they will be cached.
-ENV UV_INSTALL_DIR="/root/.local/bin/"
-ADD https://astral.sh/uv/install.sh /uv-installer.sh
-RUN sh /uv-installer.sh && rm /uv-installer.sh
-ENV PATH="/root/.local/bin/:$PATH"
+
 
 
 # Python 'run' stage
@@ -40,15 +27,18 @@ WORKDIR ${APP_HOME}
 RUN addgroup --system django \
     && adduser --system --ingroup django django
 
-
-# Install required system dependencies
+# Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
-  # Translations dependencies
+  # dependencies for building Python packages
+  build-essential \
+  # psycopg dependencies
+  libpq-dev \
+  # uv dep
+  curl \
+  ca-certificates \
   gettext \
-  locales \
-  # cleaning up unused files
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
+  locales
+
 
 # RUN sed -i '/fa_IR.UTF-8/s/^# //g' /etc/locale.gen && \
 #  locale-gen
@@ -58,6 +48,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # ENV LANGUAGE fa_IR.UTF-8
 
 # install dep
+ENV UV_INSTALL_DIR="/root/.local/bin/"
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
+ENV PATH="/root/.local/bin/:$PATH"
 ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 RUN uv sync -U --all-extras --compile-bytecode --no-cache --no-editable
 
@@ -81,8 +74,5 @@ RUN chown -R django:django ${APP_HOME}
 
 USER django
 
-RUN DATABASE_URL="" \
-  DJANGO_SETTINGS_MODULE="django_project.settings" \
-  python manage.py compilemessages
 
 ENTRYPOINT ["/entrypoint"]
