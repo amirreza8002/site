@@ -1,8 +1,12 @@
 # from django.core import serializers
 from django.http import Http404
 from django.views.generic import DetailView, ListView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+from rest_framework.viewsets import ModelViewSet
 
 from .models import Post
+from .serializers import PostSerializer
 
 
 class PostListView(ListView):
@@ -50,3 +54,9 @@ class PostDetailView(DetailView):
 #            "json", search, fields=["title", "body", "slug"]
 #        )
 #        return JsonResponse({"wrapper": response}, status=200)
+
+
+class PostViewSet(ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Post.published.all()
+    serializer_class = PostSerializer

@@ -22,6 +22,17 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap, index
 from django.urls import path, include
 
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 from posts.sitemaps import PostSiteMap
@@ -30,6 +41,30 @@ urlpatterns = i18n_patterns(
     path(settings.ADMIN_URL, admin.site.urls),
     path("blog/", include("posts.urls")),
     path("tinymce/", include("tinymce.urls")),
+    path("doc/api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "doc/api/v1/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "doc/api/v1/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
+    path(
+        "auth/jwt/api/v1/token/",
+        TokenObtainPairView.as_view(),
+        name="token_obtain_pair",
+    ),
+    path(
+        "auth/jwt/api/v1/token/refresh/",
+        TokenRefreshView.as_view(),
+        name="token_refresh",
+    ),
+    path(
+        "auth/jwt/api/v1/token/verify/", TokenVerifyView.as_view(), name="token_verify"
+    ),
     path("", include("pages.urls")),
 )
 

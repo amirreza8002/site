@@ -115,6 +115,22 @@ THUMBNAIL_BACKEND = "posts.utils.AvifBackend"
 THUMBNAIL_KVSTORE = "posts.utils.DefaultKVStore"
 THUMBNAIL_VALKEY_TIMEOUT = 3600 * 24 * 365 * 10
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+SPECTACULAR_SETTINGS = {
+    "TITLE": "site",
+    "DESCRIPTION": "personal site",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_DIST": "SIDECAR",
+    "SWAGGER_UI_FAVICON": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+}
+
 
 class Settings(BaseSettings):
     SECRET_KEY = envi.str("SECRET_KEY")
@@ -249,7 +265,11 @@ class Settings(BaseSettings):
                     # debug toolbar
                     "debug_toolbar" if self.DEBUG else None,
                     # rest
+                    "drf_redesign",
                     "rest_framework",
+                    "rest_framework_simplejwt",
+                    "drf_spectacular",
+                    "drf_spectacular_sidecar",
                     # taggit
                     "taggit",
                     # browser reload
