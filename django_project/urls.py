@@ -37,7 +37,24 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 
 from posts.sitemaps import PostSiteMap
 
-urlpatterns = i18n_patterns(
+
+urlpatterns = [
+    path(
+        "auth/jwt/api/v1/token/",
+        TokenObtainPairView.as_view(),
+        name="token_obtain_pair",
+    ),
+    path(
+        "auth/jwt/api/v1/token/refresh/",
+        TokenRefreshView.as_view(),
+        name="token_refresh",
+    ),
+    path(
+        "auth/jwt/api/v1/token/verify/", TokenVerifyView.as_view(), name="token_verify"
+    ),
+]
+
+urlpatterns += i18n_patterns(
     path(settings.ADMIN_URL, admin.site.urls),
     path("blog/", include("posts.urls")),
     path("tinymce/", include("tinymce.urls")),
@@ -52,21 +69,9 @@ urlpatterns = i18n_patterns(
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
-    path(
-        "auth/jwt/api/v1/token/",
-        TokenObtainPairView.as_view(),
-        name="token_obtain_pair",
-    ),
-    path(
-        "auth/jwt/api/v1/token/refresh/",
-        TokenRefreshView.as_view(),
-        name="token_refresh",
-    ),
-    path(
-        "auth/jwt/api/v1/token/verify/", TokenVerifyView.as_view(), name="token_verify"
-    ),
     path("", include("pages.urls")),
 )
+
 
 sitemaps = {
     "posts": PostSiteMap,
