@@ -10,10 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import logging
 from pathlib import Path
 
 from cbs import BaseSettings
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 from django.utils.translation import gettext_lazy as _
 
@@ -302,6 +306,26 @@ class ProdSettings(Settings):
     CSRF_COOKIE_SECURE = envi.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
     CSRF_COOKIE_HTTPONLY = envi.bool("DJANGO_CSRF_COOKIE_HTTPONLY", default=True)
 
+    # sentry
+    SENTRY_DSN = envi.str("SENTRY_DSN", default="")
+    SENTRY_LOG_LEVEL = envi.int("SENTRY_LOG_LEVEL", logging.INFO)
+
+    sentry_logging = LoggingIntegration(
+        level=SENTRY_LOG_LEVEL,
+        event_level=logging.ERROR,
+    )
+    integrations = [
+        sentry_logging,
+        DjangoIntegration(),
+    ]
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=integrations,
+        environment="production",
+        traces_sample_rate=envi.float("SENTRY_TRACE_SAMPLE_RATE", default=0.0),
+    )
+
     STORAGES = {
         "default": {
             "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -313,21 +337,13 @@ class ProdSettings(Settings):
 
     LOGGING = {
         "version": 1,
-        "disable_existing_loggers": False,
-        "filters": {
-            "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
-        },
+        "disable_existing_loggers": True,
         "formatters": {
             "verbose": {
                 "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
             },
         },
         "handlers": {
-            "mail_admins": {
-                "level": "ERROR",
-                "filters": ["require_debug_false"],
-                "class": "django.utils.log.AdminEmailHandler",
-            },
             "console": {
                 "level": "DEBUG",
                 "class": "logging.StreamHandler",
@@ -336,15 +352,21 @@ class ProdSettings(Settings):
         },
         "root": {"level": "INFO", "handlers": ["console"]},
         "loggers": {
-            "django.request": {
-                "handlers": ["mail_admins"],
+            "django.db.backends": {
                 "level": "ERROR",
-                "propagate": True,
+                "handlers": ["console"],
+                "propagate": False,
+            },
+            # Errors logged by the SDK itself
+            "sentry_sdk": {
+                "level": "ERROR",
+                "handlers": ["console"],
+                "propagate": False,
             },
             "django.security.DisallowedHost": {
                 "level": "ERROR",
-                "handlers": ["console", "mail_admins"],
-                "propagate": True,
+                "handlers": ["console"],
+                "propagate": False,
             },
         },
     }
