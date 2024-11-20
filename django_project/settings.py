@@ -291,6 +291,13 @@ class ProdSettings(Settings):
         "ALLOWED_HOSTS",
     )
     ADMIN_URL = envi.str("ADMIN_URL", default="admin/")
+    SESSION_COOKIE_SECURE = envi.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
+    SESSION_COOKIE_HTTPONLY = envi.bool("DJANGO_SESSION_COOKIE_HTTPONLY", default=True)
+
+    CSRF_TRUSTED_ORIGINS = envi.list("DJANGO_TRUSTED_ORIGINS", default=["localhost"])
+    CSRF_COOKIE_SECURE = envi.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
+    CSRF_COOKIE_HTTPONLY = envi.bool("DJANGO_CSRF_COOKIE_HTTPONLY", default=True)
+
     STORAGES = {
         "default": {
             "BACKEND": "django.core.files.storage.FileSystemStorage",
