@@ -5,6 +5,8 @@ the frontend of this project is mostly from [this project](https://github.com/ap
 this project uses `uv` as python package manager.
 for css, `tailwind` is used, the main file is `static/css/style.css` and the built version is `static/css/built.css`, do build before checking the page.
 
+for development `harlequin` is used, install with `pipx install 'harlequin[postgres]'`
+
 
 you should add a `.env` file containing:
 1. `ALLOWED_HOSTS`, a comma separated list.
@@ -15,6 +17,7 @@ you should add a `.env` file containing:
 6. `ADMIN_URL`, production setting, default to `admin/`
 7. `DEBUG`, in production it defaults to `False`
 8. `CACHE_HOST` the host name of your cache server, e.g 127.0.0.1
+9. `DJANGO_TRUSTED_ORIGINS` in production, e.g https://example.com
 
 INTERNAL_IPS is set to 127.0.0.1, change that if you are using docker
 
