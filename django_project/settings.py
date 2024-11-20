@@ -131,6 +131,8 @@ SPECTACULAR_SETTINGS = {
     "REDOC_DIST": "SIDECAR",
 }
 
+ADMINS = [envi.tuple("DJANGO_ADMINS")]
+
 
 class Settings(BaseSettings):
     SECRET_KEY = envi.str("SECRET_KEY")
