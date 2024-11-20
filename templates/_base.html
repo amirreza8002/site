@@ -21,9 +21,9 @@
 {% block header %}
   <header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
     <a href="{% url 'pages:home' %}" class="capitalize font-extrabold text-2xl">
-    <img src="{% static 'img/logo.png' %}" alt="logo" class="h-8 max-w-full">
+    <img width="43" height="32" src="{% static 'img/logo.png' %}" alt="logo" class="h-8 max-w-full" loading="lazy">
     </a>
-    <button class="mobile-menu-button md:hidden">
+    <button aria-label="menu" class="mobile-menu-button md:hidden">
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
         <line x1="4" y1="8" x2="20" y2="8" />
@@ -48,7 +48,7 @@
             <path d="M11.5 3a17 17 0 0 0 0 18" />
             <path d="M12.5 3a17 17 0 0 1 0 18" />
           </svg>
-          <a>{% translate 'Language' %}</a>
+          <button aria-label="change language">{% translate 'Language' %}</button>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
             stroke-linejoin="round">
