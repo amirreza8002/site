@@ -52,7 +52,7 @@ ENV UV_INSTALL_DIR="/root/.local/bin/"
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 ENV PATH="/root/.local/bin/:$PATH"
 ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
-RUN uv sync -U --all-extras --compile-bytecode --no-cache --no-editable
+RUN uv sync -U --compile-bytecode --no-cache --no-editable
 
 COPY --chown=django:django ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
