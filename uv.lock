@@ -338,6 +338,18 @@ wheels = [
 ]
 
 [[package]]
+name = "django-harlequin"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ed/28/ec42c0c2d69f7a30e0a704348a0b3b372dac4915501329609b06302d8cca/django_harlequin-1.4.0.tar.gz", hash = "sha256:130cd77ddad9b9cd48e8a7ffff515c1ea1a89ff53200c59eb69330fa8eae17fd", size = 7187 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e9/a0/9f0db34364db9082ae11605eabaf3736e8f17edaa4cacc0aa8e24e8159d6/django_harlequin-1.4.0-py3-none-any.whl", hash = "sha256:8e42e78206b506236a7ce7dedc65f944e70654f952965d3a4cceba72c298b7e0", size = 5827 },
+]
+
+[[package]]
 name = "django-stubs"
 version = "5.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1013,6 +1025,7 @@ dev = [
     { name = "django-coverage-plugin" },
     { name = "django-debug-toolbar" },
     { name = "django-extensions" },
+    { name = "django-harlequin" },
     { name = "django-stubs" },
     { name = "pre-commit" },
     { name = "pytest" },
@@ -1052,6 +1065,7 @@ dev = [
     { name = "django-coverage-plugin", specifier = ">=3.1.0" },
     { name = "django-debug-toolbar", specifier = ">=4.4.6" },
     { name = "django-extensions", specifier = ">=3.2.3" },
+    { name = "django-harlequin", specifier = ">=1.4.0" },
     { name = "django-stubs", specifier = ">=5.1.1" },
     { name = "pre-commit", specifier = ">=4.0.1" },
     { name = "pytest", specifier = ">=8.3.3" },

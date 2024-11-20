@@ -280,6 +280,8 @@ class Settings(BaseSettings):
                     "django_extensions" if self.DEBUG else None,
                     # tiny
                     "tinymce",
+                    # harlequin
+                    "django_harlequin" if self.DEBUG else None,
                     # local
                     "posts",
                 ],
