@@ -10,5 +10,5 @@ class PostSerializer(TaggitSerializer, ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("title", "slug", "body", "image", "alt", "status", "tags", "pin")
+        fields = ("title", "body", "image", "alt", "status", "tags", "pin")
         read_only_fields = ("created_at", "published_at", "updated_at")
