@@ -17,7 +17,7 @@
     {% block js_links %}
     {% endblock js_links %}
   </head>
-<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen">
+<body class="bg-[#FFF5EE] text-[#141514] dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen">
 {% block header %}
   <header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
     <a href="{% url 'pages:home' %}" class="capitalize font-extrabold text-2xl">
@@ -31,7 +31,7 @@
       </svg>
     </button>
 
-    <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+    <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6">
       <li><a href="{% url 'posts:post-list' %}">{% translate 'Blog' %}</a></li>
       <li><a href="{% url 'pages:about' %}">{% translate 'About' %}</a></li>
       <li><a href="{% url 'posts:feed-atom' %}">{% translate 'Feed' %}</a></li>
@@ -57,7 +57,7 @@
           </svg>
         </span>
           <div
-            class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+            class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-zinc-800 dark:text-white z-10 hidden">
             {% get_available_languages as langs %}
             {% for lang in langs %}
             <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/{{ lang.0 }}/" lang="{{ lang.0 }}">{{ lang.1 }}</a>
@@ -107,7 +107,7 @@
 {% block main %}
 {% endblock main %}
 <!-- socials -->
-  <div class="bg-blue-100 dark:bg-gray-900">
+  <div class="bg-sky-100 dark:bg-gray-900">
     <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
       <div>
         <div class="text-2xl font-bold mb-2">{% translate 'My Socials' %}</div>
@@ -186,7 +186,7 @@
   <!-- end socials -->
 </main>
 
-<footer class="container p-6 mx-auto flex justify-between items-center">
+<footer class="bg-[#FFF5EE] dark:bg-gray-800 container p-6 mx-auto flex justify-between items-center">
 {% block footer %}
   <span class="text-sm font-light">
     Copyright © 2024-now - Amirreza sohrabi far
