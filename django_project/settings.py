@@ -123,6 +123,48 @@ SPECTACULAR_SETTINGS = {
 ADMINS = [envi.tuple("DJANGO_ADMINS")]
 
 
+MARKDOWNIFY = {
+        "default": {
+            "WHITELIST_TAGS": [
+                "a",
+                "abbr",
+                "acronym",
+                "b",
+                "blockquote",
+                "code",
+                "em",
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "h5",
+                "h6",
+                "i",
+                "li",
+                "ol",
+                "p",
+                "pre",
+                "strong",
+                "ul",
+                ],
+            "WHITELIST_ATTRS": [
+                "href",
+                "src",
+                "alt",
+                ],
+            "LINKIFY_TEXT": {
+                "PARSE_URLS": True,
+                "PARSE_EMAIL": True,
+                "SKIP_TAGS": [
+                    "pre",
+                    "code",
+                    ]
+                },
+
+            },
+        }
+
+
 class Settings(BaseSettings):
     SECRET_KEY = envi.str("SECRET_KEY")
     ALLOWED_HOSTS = ("localhost", "127.0.0.1")
@@ -261,6 +303,8 @@ class Settings(BaseSettings):
                     "rest_framework_simplejwt",
                     "drf_spectacular",
                     "drf_spectacular_sidecar",
+                    # markdown
+                    "markdownify",
                     # taggit
                     "taggit",
                     # browser reload
