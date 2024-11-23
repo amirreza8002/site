@@ -41,7 +41,6 @@ from posts.sitemaps import PostSiteMap
 urlpatterns = i18n_patterns(
     path(settings.ADMIN_URL, admin.site.urls),
     path("blog/", include("posts.urls")),
-    path("tinymce/", include("tinymce.urls")),
     path("doc/api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "doc/api/v1/swagger-ui/",

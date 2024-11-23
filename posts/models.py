@@ -6,7 +6,6 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from taggit.managers import TaggableManager
-from tinymce.models import HTMLField
 
 from .utils import convert_pictures
 
@@ -29,7 +28,7 @@ class Post(models.Model):
     slug = models.SlugField(verbose_name=_("slug"), max_length=300, unique=True)
     image = models.ImageField(verbose_name=_("image"), upload_to="posts/%Y/%m/%d")
     alt = models.CharField(verbose_name=_("alt"), max_length=100)
-    body = HTMLField(verbose_name=_("body"))
+    body = models.TextField(verbose_name=_("body"))
     status = models.CharField(
         verbose_name=_("status"),
         choices=Status.choices,

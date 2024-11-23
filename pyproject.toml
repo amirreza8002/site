@@ -9,7 +9,6 @@ dependencies = [
     "django-classy-settings>=3.0.7",
     "django-environ>=0.11.2",
     "django-taggit>=6.1.0",
-    "django-tinymce>=4.1.0",
     "django-valkey[brotli,libvalkey]>=0.1.8",
     "django>=5.1.2",
     "djangorestframework-simplejwt[crypto]>=5.3.1",

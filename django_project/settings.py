@@ -97,21 +97,6 @@ SESSION_CACHE_ALIAS = "default"
 # tailwind
 TAILWIND_APP_NAME = "theme"
 
-# tinymce
-TINYMCE_DEFAULT_CONFIG = {
-    "height": "420px",
-    "width": "960px",
-    "menubar": "file edit view insert format tools table help",
-    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
-    "fullscreen insertdatetime media table paste code help wordcount spellchecker",
-    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
-    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
-    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
-    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
-    "a11ycheck ltr rtl | showcomments addcomment code",
-    "custom_undo_redo_levels": 10,
-}
-
 # thumbnail
 THUMBNAIL_FORMAT = "AVIF"
 THUMBNAIL_ENGINE = "posts.utils.AvifEngine"
@@ -282,8 +267,6 @@ class Settings(BaseSettings):
                     "django_browser_reload" if self.DEBUG else None,
                     # extensions
                     "django_extensions" if self.DEBUG else None,
-                    # tiny
-                    "tinymce",
                     # harlequin
                     "django_harlequin" if self.DEBUG else None,
                     # local
