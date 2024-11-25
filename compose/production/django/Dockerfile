@@ -61,6 +61,9 @@ RUN chmod +x /entrypoint
 RUN mkdir /app/staticfiles
 RUN chown django:django /app/staticfiles
 
+RUN mkdir /app/media -p
+RUN chown django:django /app/media
+
 COPY --chown=django:django ./compose/production/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
