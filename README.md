@@ -18,6 +18,8 @@ you should add a `.env` file containing:
 7. `DEBUG`, in production it defaults to `False`
 8. `CACHE_HOST` the host name of your cache server, e.g 127.0.0.1
 9. `DJANGO_TRUSTED_ORIGINS` in production, e.g https://example.com
+10. `HEALTH_CHECK_TOKEN` should be a secure token that is used to make health check url private.
+11. `DJANGO_ADMINS` a tuple of name, email. e.g. admin,admin@emai.com
 
 INTERNAL_IPS is set to 127.0.0.1, change that if you are using docker
 
