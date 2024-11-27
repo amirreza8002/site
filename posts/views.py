@@ -57,6 +57,7 @@ class PostDetailView(DetailView):
 
 
 class PostViewSet(ModelViewSet):
+    lookup_field = "slug"
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.published.all()
     serializer_class = PostSerializer
