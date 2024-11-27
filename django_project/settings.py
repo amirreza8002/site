@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 import logging
 from pathlib import Path
 
@@ -119,58 +120,61 @@ SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_FAVICON": "SIDECAR",
     "REDOC_DIST": "SIDECAR",
 }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
 
 ADMINS = [envi.tuple("DJANGO_ADMINS")]
 
 
 MARKDOWNIFY = {
-        "default": {
-            "WHITELIST_TAGS": [
-                "a",
-                "abbr",
-                "acronym",
-                "b",
-                "blockquote",
-                "code",
-                "em",
-                "h1",
-                "h2",
-                "h3",
-                "h4",
-                "h5",
-                "h6",
-                "i",
-                "li",
-                "ol",
-                "p",
+    "default": {
+        "WHITELIST_TAGS": [
+            "a",
+            "abbr",
+            "acronym",
+            "b",
+            "blockquote",
+            "code",
+            "em",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "i",
+            "li",
+            "ol",
+            "p",
+            "pre",
+            "strong",
+            "ul",
+        ],
+        "WHITELIST_ATTRS": [
+            "href",
+            "src",
+            "alt",
+        ],
+        "LINKIFY_TEXT": {
+            "PARSE_URLS": True,
+            "PARSE_EMAIL": True,
+            "SKIP_TAGS": [
                 "pre",
-                "strong",
-                "ul",
-                ],
-            "WHITELIST_ATTRS": [
-                "href",
-                "src",
-                "alt",
-                ],
-            "LINKIFY_TEXT": {
-                "PARSE_URLS": True,
-                "PARSE_EMAIL": True,
-                "SKIP_TAGS": [
-                    "pre",
-                    "code",
-                    ]
-                },
-
-            },
-        }
+                "code",
+            ],
+        },
+    },
+}
 
 
 # health check
 HEALTH_CHECK_TOKEN = envi.str("HEALTH_CHECK_TOKEN")
 HEALTH_CHECK = {
-        "DISK_USAGE_MAX": 90,
-        "MEMORY_MIN": 100,
-        }
+    "DISK_USAGE_MAX": 90,
+    "MEMORY_MIN": 100,
+}
 
 
 class Settings(BaseSettings):
@@ -284,12 +288,9 @@ class Settings(BaseSettings):
                 "HOST": envi.str("POSTGRES_HOST", default="localhost"),
                 "PORT": 5432,
                 "ATOMIC_REQUESTS": True,
-
                 "OPTIONS": {
-                    "pool": {
-                        "max_lifetime": 60
-                        },
-                    }
+                    "pool": {"max_lifetime": 60},
+                },
             }
         }
 
