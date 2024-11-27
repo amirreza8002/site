@@ -284,6 +284,12 @@ class Settings(BaseSettings):
                 "HOST": envi.str("POSTGRES_HOST", default="localhost"),
                 "PORT": 5432,
                 "ATOMIC_REQUESTS": True,
+
+                "OPTIONS": {
+                    "pool": {
+                        "max_lifetime": 60
+                        },
+                    }
             }
         }
 
@@ -412,13 +418,6 @@ class ProdSettings(Settings):
             },
         },
     }
-
-    def DATABASES(self):
-        database = super().DATABASES()
-        database["default"]["CONN_MAX_AGE"] = envi.int(
-            "django_conn_max_age", default=60
-        )
-        return database
 
 
 class TestSettings(Settings):
