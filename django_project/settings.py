@@ -165,6 +165,14 @@ MARKDOWNIFY = {
         }
 
 
+# health check
+HEALTH_CHECK_TOKEN = envi.str("HEALTH_CHECK_TOKEN")
+HEALTH_CHECK = {
+        "DISK_USAGE_MAX": 90,
+        "MEMORY_MIN": 100,
+        }
+
+
 class Settings(BaseSettings):
     SECRET_KEY = envi.str("SECRET_KEY")
     ALLOWED_HOSTS = ("localhost", "127.0.0.1")
@@ -313,6 +321,13 @@ class Settings(BaseSettings):
                     "django_extensions" if self.DEBUG else None,
                     # harlequin
                     "django_harlequin" if self.DEBUG else None,
+                    # health check
+                    "health_check",
+                    "health_check.db",
+                    "health_check.cache",
+                    "health_check.storage",
+                    "health_check.contrib.migrations",
+                    "health_check.contrib.psutil",
                     # local
                     "posts",
                 ],

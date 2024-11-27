@@ -56,6 +56,7 @@ urlpatterns = i18n_patterns(
 )
 
 urlpatterns += [
+    path(f"ht/{settings.HEALTH_CHECK_TOKEN}/", include("health_check.urls")),
     path("blog/", include("posts.api_urls")),
     path(
         "auth/jwt/api/v1/token/",
