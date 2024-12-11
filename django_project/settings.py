@@ -95,9 +95,6 @@ TAGGIT_CASE_INSENSITIVE = True
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
-# tailwind
-TAILWIND_APP_NAME = "theme"
-
 # thumbnail
 THUMBNAIL_FORMAT = "AVIF"
 THUMBNAIL_ENGINE = "posts.utils.AvifEngine"
