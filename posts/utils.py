@@ -1,17 +1,13 @@
 import logging
-from io import BytesIO
 from pathlib import Path
 
 from django.conf import settings
 from django.core.cache import cache
 
-from PIL import Image, ImageFile
+from PIL import Image
 import pillow_avif  # noqa: F401
 
-from sorl.thumbnail.base import ThumbnailBackend
-from sorl.thumbnail.conf import defaults as default_settings, settings as sorl_settings
-from sorl.thumbnail.engines.pil_engine import Engine
-from sorl.thumbnail.helpers import tokey, serialize
+from sorl.thumbnail.conf import settings as sorl_settings
 from sorl.thumbnail.kvstores.base import KVStoreBase
 
 
@@ -68,83 +64,6 @@ def convert_pictures(filepath: str, format="AVIF", unlink=True, **kwargs):
         filepath.unlink()
 
     return rel_path
-
-
-EXTENSIONS = {
-    "JPEG": "jpg",
-    "PNG": "png",
-    "GIF": "gif",
-    "WEBP": "webp",
-    "AVIF": "avif",
-}
-
-
-class AvifBackend(ThumbnailBackend):
-    def _get_thumbnail_filename(self, source, geometry_string, options):
-        """
-        Compute the destination filename.
-        """
-        key = tokey(source.key, geometry_string, serialize(options))
-        path = f"{key[:2]}{key[2:4]}{key}"
-        return f"{sorl_settings.THUMBNAIL_PREFIX}{path}.{EXTENSIONS[options["format"]]}"
-
-    def _get_format(self, source):
-        file_extension = self.file_extension(source)
-
-        if file_extension == ".jpg" or file_extension == ".jpeg":
-            return "JPEG"
-        elif file_extension == ".avif":
-            return "AVIF"
-        elif file_extension == ".png":
-            return "PNG"
-        elif file_extension == ".gif":
-            return "GIF"
-        elif file_extension == ".webp":
-            return "WEBP"
-        else:
-            from django.conf import settings
-
-            return getattr(
-                settings, "THUMBNAIL_FORMAT", default_settings.THUMBNAIL_FORMAT
-            )
-
-
-class AvifEngine(Engine):
-    def _get_raw_data(
-        self, image, format_, quality, image_info=None, progressive=False
-    ):
-        # Increase (but never decrease) PIL buffer size
-        ImageFile.MAXBLOCK = max(ImageFile.MAXBLOCK, image.size[0] * image.size[1])
-        bf = BytesIO()
-
-        params = {
-            "format": format_,
-            "quality": quality,
-            "optimize": 1,
-        }
-
-        # keeps icc_profile
-        if "icc_profile" in image_info:
-            params["icc_profile"] = image_info["icc_profile"]
-
-        raw_data = None
-
-        if format_ == "JPEG" and progressive:
-            params["progressive"] = True
-        try:
-            # Do not save unnecessary exif data for smaller thumbnail size
-            params.pop("exif", {})
-            image.save(bf, **params)
-        except OSError:
-            # Try without optimization.
-            params.pop("optimize")
-            image.save(bf, **params)
-        else:
-            raw_data = bf.getvalue()
-        finally:
-            bf.close()
-
-        return raw_data
 
 
 class DefaultKVStore(KVStoreBase):

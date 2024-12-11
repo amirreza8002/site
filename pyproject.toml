@@ -25,6 +25,7 @@ dependencies = [
     "psycopg[c,pool]>=3.2.3",
     "sentry-sdk[django]>=2.18.0",
     "sorl-thumbnail>=12.11.0",
+    "sorl-thumbnail-avif>=0.1.0",
 ]
 
 [tool.uv]

@@ -97,8 +97,8 @@ SESSION_CACHE_ALIAS = "default"
 
 # thumbnail
 THUMBNAIL_FORMAT = "AVIF"
-THUMBNAIL_ENGINE = "posts.utils.AvifEngine"
-THUMBNAIL_BACKEND = "posts.utils.AvifBackend"
+THUMBNAIL_ENGINE = "sorl_thumbnail_avif.thumbnail.engines.AvifEngine"
+THUMBNAIL_BACKEND = "sorl_thumbnail_avif.thumbnail.AvifThumbnail"
 THUMBNAIL_KVSTORE = "posts.utils.DefaultKVStore"
 THUMBNAIL_VALKEY_TIMEOUT = 3600 * 24 * 365 * 10
 
