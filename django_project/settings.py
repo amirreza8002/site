@@ -349,6 +349,8 @@ class ProdSettings(Settings):
     SESSION_COOKIE_SECURE = envi.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
     SESSION_COOKIE_HTTPONLY = envi.bool("DJANGO_SESSION_COOKIE_HTTPONLY", default=True)
 
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
     CSRF_TRUSTED_ORIGINS = envi.list("DJANGO_TRUSTED_ORIGINS", default=["localhost"])
     CSRF_COOKIE_SECURE = envi.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
     CSRF_COOKIE_HTTPONLY = envi.bool("DJANGO_CSRF_COOKIE_HTTPONLY", default=True)
